@@ -7,7 +7,8 @@ class MarkovMachine {
 
   constructor(text) {
     let words = text.split(/[ \r\n]+/);
-    // MORE CODE HERE
+    this.words = words;
+    // MORE CODE HERE - further study? 
   }
 
   /** set markov chains:
@@ -16,9 +17,29 @@ class MarkovMachine {
    *  {"the": ["cat", "hat"], "cat": ["in"], "in": ["the"], "hat": [null]} */
 
   makeChains() {
-    // MORE CODE HERE
-  }
+    // check each word and then push the word that comes after it to the object at that word's key
+    let markovChains = {}
 
+    for (let i = 0; i < this.words.length; i++) {
+
+      if (i === this.words.length - 1) {
+        if (this.words[i] in markovChains && this.words[i + 1] === undefined) {
+          markovChains[this.words[i]].push(null);
+        } else {
+          markovChains[this.words[i]] = [null];
+        }
+        
+      } else {
+
+        if (this.words[i] in markovChains) {
+          markovChains[this.words[i]].push(this.words[i + 1])
+        } else {
+          markovChains[this.words[i]] = [this.words[i + 1]]
+        }
+      }
+    }
+    return markovChains;
+  }
 
   /** return random text from chains */
 
