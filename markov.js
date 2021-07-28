@@ -1,4 +1,7 @@
 /** Textual markov chain generator */
+const fsp = require("fs/promises")
+const axios = require("axios")
+const TEXT_FILE = process.argv[2]
 
 
 class MarkovMachine {
@@ -28,7 +31,7 @@ class MarkovMachine {
         } else {
           markovChains[this.words[i]] = [null];
         }
-        
+
       } else {
 
         if (this.words[i] in markovChains) {
@@ -44,6 +47,41 @@ class MarkovMachine {
   /** return random text from chains */
 
   getText(numWords = 100) {
-    // MORE CODE HERE
+    let markovChains = this.makeChains();
+    const RAND_START = randomIntFromInterval(0, this.words.length - 1);
+    let startingWord = this.words[RAND_START];
+    let text = startingWord;
+
+    for (let i = 0; i < 100; i++) {
+
+      let random = Math.floor(Math.random() * (markovChains[startingWord].length - 1))
+
+      let word = markovChains[startingWord][random];
+
+      if (word === null) {
+        i--;
+        continue;
+      } else {
+        text += ` ${word}`;
+        startingWord = word;
+      }
+    }
+    console.log(text)
+    return text
   }
+}
+
+
+
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+
+module.exports = {
+
+  MarkovMachine,
+  randomIntFromInterval,
+  // TEXT_FILE,
+
 }

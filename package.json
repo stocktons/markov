@@ -7,5 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sarah and Lance",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stocktons/markov.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stocktons/markov/issues"
+  },
+  "homepage": "https://github.com/stocktons/markov#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
