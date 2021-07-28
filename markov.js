@@ -1,8 +1,5 @@
 /** Textual markov chain generator */
 const fsp = require("fs/promises")
-const axios = require("axios")
-const TEXT_FILE = process.argv[2]
-
 
 class MarkovMachine {
 
@@ -52,7 +49,7 @@ class MarkovMachine {
     let startingWord = this.words[RAND_START];
     let text = startingWord;
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < numWords - 1; i++) {
 
       let random = Math.floor(Math.random() * (markovChains[startingWord].length - 1))
 
